@@ -2,70 +2,109 @@
 
 Ein minimalistisches iPhone-Widget für wichtige Semesterzeiträume, Termine und Countdowns.
 
-Das Widget funktioniert automatisch in **Small**, **Medium** und **Large**.
+Das Widget passt sich automatisch an **Small**, **Medium** und **Large** an und verwendet standardmäßig die Semester-Daten von:
+
+```text
+https://lukasedelmann.com/semester.json
+```
+
+## Vorschau
+
+## Vorschau
+
+<p align="center">
+  <img src="screenshots/small.png" alt="Semester Counter – Small Widget" width="180">
+  <img src="screenshots/medium.png" alt="Semester Counter – Medium Widget" width="320">
+  <img src="screenshots/large.png" alt="Semester Counter – Large Widget" width="320">
+</p>
+
+## Features
+
+- automatische Darstellung für **Small**, **Medium** und **Large**
+- aktueller wichtiger Zeitraum als Highlight
+- Countdown bis zum Ende eines laufenden Zeitraums
+- Countdown bis zum nächsten wichtigen Termin oder Zeitraum
+- weitere kommende Termine im Large-Widget
+- Semesterfortschritt im Large-Widget
+- Light- und Dark-Mode
+- automatische Aktualisierung der Daten
+- ein Script für alle drei Widget-Größen
 
 ## Einrichtung
 
-Du brauchst nur die kostenlose App **Scriptable**.
+Die Einrichtung dauert nur wenige Minuten.
 
 ### 1. Scriptable installieren
 
-Installiere Scriptable aus dem App Store und öffne die App einmal.
+Installiere die kostenlose App **Scriptable** aus dem App Store und öffne sie einmal.
 
 https://apps.apple.com/app/scriptable/id1405459188
 
 ### 2. Widget-Script kopieren
 
-1. Öffne die `.js`-Datei aus diesem Repository.
+1. Öffne die `.js`-Datei dieses Widgets in diesem Repository.
 2. Kopiere den kompletten Inhalt.
-3. Öffne Scriptable.
+3. Öffne **Scriptable**.
 4. Tippe oben rechts auf **+**.
 5. Füge den Code ein.
 6. Gib dem Script z. B. den Namen **Semester Counter**.
 
 Du musst im Script nichts ändern.
 
-Standardmäßig lädt das Widget die Semester-Daten von:
-
-```text
-https://lukasedelmann.com/semester.json
-```
-
 ### 3. Widget testen
 
-Starte das Script in Scriptable mit dem **Play-Button**.
+Starte das Script in Scriptable über den **Play-Button**.
 
-Danach kannst du direkt eine Vorschau auswählen:
+Danach kannst du eine Vorschau auswählen:
 
 - Small
 - Medium
 - Large
 
-Wenn die Vorschau erscheint, ist alles eingerichtet.
+Wenn die Vorschau korrekt angezeigt wird, ist das Script fertig eingerichtet.
 
 ### 4. Widget zum Homescreen hinzufügen
 
-1. Halte den Homescreen gedrückt.
+1. Halte den iPhone-Homescreen gedrückt.
 2. Wähle **Widget hinzufügen**.
 3. Suche nach **Scriptable**.
-4. Wähle die gewünschte Größe: Small, Medium oder Large.
+4. Wähle die gewünschte Größe.
 5. Füge das Widget hinzu.
-6. Halte das Widget gedrückt und wähle **Widget bearbeiten**.
-7. Wähle bei **Script** dein eben angelegtes **Semester Counter** Script aus.
+6. Halte das neue Widget gedrückt und wähle **Widget bearbeiten**.
+7. Wähle bei **Script** dein Script **Semester Counter** aus.
 
 Fertig.
 
-Du kannst dasselbe Script gleichzeitig für mehrere Widget-Größen verwenden. Die Darstellung passt sich automatisch an.
+Dasselbe Script kann gleichzeitig für mehrere Widget-Größen verwendet werden.
 
-## Was wird angezeigt?
+## Darstellung
 
-Je nach Widget-Größe werden unter anderem angezeigt:
+### Small
 
-- aktuell laufende wichtige Zeiträume
-- der nächste wichtige Zeitraum oder Termin
-- weitere kommende Termine
-- ein Countdown in Tagen
-- im Large-Widget zusätzlich der Semesterfortschritt
+Zeigt genau die aktuell wichtigste Information:
+
+- laufender Zeitraum, oder
+- nächster wichtiger Termin
+
+### Medium
+
+Zeigt:
+
+- aktuellen Zeitraum oder Termin
+- den nächsten kommenden Eintrag
+
+### Large
+
+Zeigt zusätzlich:
+
+- mehrere weitere Termine
+- Semesterfortschritt
+
+## Aktualisierung
+
+Das Widget lädt die Semester-Daten automatisch neu.
+
+Wichtig: iOS entscheidet selbst, wann Homescreen-Widgets tatsächlich aktualisiert werden. Das Script fordert regelmäßige Aktualisierungen an, kann den exakten Zeitpunkt aber nicht garantieren.
 
 ---
 
@@ -73,16 +112,14 @@ Je nach Widget-Größe werden unter anderem angezeigt:
 
 ## Eigene Datenquelle verwenden
 
-Wenn du nicht die Standard-Datenquelle verwenden möchtest, kannst du im Script diese Zeile ändern:
+Standardmäßig wird diese Datei verwendet:
 
 ```javascript
 const DATA_URL =
   "https://lukasedelmann.com/semester.json";
 ```
 
-Ersetze die URL einfach durch deine eigene öffentlich erreichbare JSON-Datei.
-
-Beispiel:
+Wenn du eigene Semester-Daten verwenden möchtest, kannst du die URL einfach durch eine öffentlich erreichbare JSON-Datei ersetzen:
 
 ```javascript
 const DATA_URL =
@@ -128,9 +165,9 @@ Beispiel:
 }
 ```
 
-### Eintragstypen
+### Zeitraum
 
-**Zeitraum**
+Für einen Zeitraum wird `type: "period"` verwendet:
 
 ```json
 {
@@ -143,7 +180,9 @@ Beispiel:
 }
 ```
 
-**Einzeltermin**
+### Einzeltermin
+
+Für einen einzelnen Termin wird `type: "event"` verwendet:
 
 ```json
 {
@@ -156,10 +195,28 @@ Beispiel:
 }
 ```
 
-`time` ist bei Einzelterminen optional.
+`time` ist optional.
 
-Eine höhere `priority` macht einen Eintrag wichtiger, falls mehrere Einträge gleichzeitig aktiv sind.
+### Priorität
 
-## Hinweis zur Aktualisierung
+Wenn mehrere Einträge gleichzeitig aktiv sind, wird der Eintrag mit der höheren `priority` bevorzugt.
 
-iOS entscheidet selbst, wann Homescreen-Widgets aktualisiert werden. Das Script fordert regelmäßig neue Daten an, ein exakter Aktualisierungszeitpunkt kann von Scriptable aber nicht garantiert werden.
+Beispiel:
+
+```text
+priority: 10  → sehr wichtig
+priority: 5   → normal
+priority: 1   → geringe Priorität
+```
+
+## Screenshot-Struktur
+
+Damit die Vorschau im README funktioniert, sollten die Bilder so im Repository liegen:
+
+```text
+README.md
+screenshots/
+├── small.png
+├── medium.png
+└── large.png
+```
