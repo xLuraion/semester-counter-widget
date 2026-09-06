@@ -10,8 +10,6 @@ https://lukasedelmann.com/semester.json
 
 ## Vorschau
 
-## Vorschau
-
 <p align="center">
   <img src="screenshots/small.png" alt="Semester Counter – Small Widget" width="180">
   <img src="screenshots/medium.png" alt="Semester Counter – Medium Widget" width="320">
