@@ -7,6 +7,7 @@ Das Widget passt sich automatisch an **Small**, **Medium** und **Large** an und 
 ```text
 https://lukasedelmann.com/semester.json
 ```
+Sie beinhaltet alle wichtigen Termine für das Bachelor Studium Elektrotechnik an der HAW Kiel und wird regelmäßig aktualisiert.
 
 ## Vorschau
 
@@ -205,16 +206,4 @@ Beispiel:
 priority: 10  → sehr wichtig
 priority: 5   → normal
 priority: 1   → geringe Priorität
-```
-
-## Screenshot-Struktur
-
-Damit die Vorschau im README funktioniert, sollten die Bilder so im Repository liegen:
-
-```text
-README.md
-screenshots/
-├── small.png
-├── medium.png
-└── large.png
 ```
